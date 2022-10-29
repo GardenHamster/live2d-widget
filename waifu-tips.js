@@ -48,7 +48,17 @@
             if (localStorage.setItem("modelId", t), localStorage.setItem("modelTexturesId", s), o(n, 4e3, 10), this.useCDN) {
                 this.modelList || await this.loadModelList();
                 const o = e(this.modelList.models[t]);
+                console.log(`Live2D modelId=${t}，modelTexturesId=${s}，target=${o}`);
                 loadlive2d("live2d", `${this.cdnPath}model/${o}/index.json`)
+            } else
+                loadlive2d("live2d", `${this.apiPath}get/?id=${t}-${s}`), console.log(`Live2D 模型 ${t}-${s} 加载完成`)
+        }
+        async loadTargetModel(t, s, m, n) {
+            if (localStorage.setItem("modelId", t), localStorage.setItem("modelTexturesId", s), o(n, 4e3, 10), this.useCDN) {
+                this.modelList || await this.loadModelList();
+                if(m===null) m = e(this.modelList.models[t]);
+                console.log(`Live2D modelId=${t}，modelTexturesId=${s}，target=${m}`);
+                loadlive2d("live2d", `${this.cdnPath}model/${m}/index.json`)
             } else
                 loadlive2d("live2d", `${this.apiPath}get/?id=${t}-${s}`), console.log(`Live2D 模型 ${t}-${s} 加载完成`)
         }
@@ -58,6 +68,7 @@
             if (this.useCDN) {
                 this.modelList || await this.loadModelList();
                 const s = e(this.modelList.models[t]);
+                console.log(`Live2D modelId=${t}，target=${s}`);
                 loadlive2d("live2d", `${this.cdnPath}model/${s}/index.json`),
                 o("我的新衣服好看嘛？", 4e3, 10)
             } else
@@ -239,10 +250,11 @@
         }
         (),
         function () {
-            let e = localStorage.getItem("modelId"),
-            o = localStorage.getItem("modelTexturesId");
-            null === e && (e = 1, o = 53),
-            i.loadModel(e, o),
+            let e = localStorage.getItem("modelId");
+            let o = localStorage.getItem("modelTexturesId");
+            let m = null;
+            null === e && (e = 0, o = 0, m = 'HyperdimensionNeptunia/nepmaid'),
+            i.loadTargetModel(e, o, m),
             fetch(t.waifuPath).then((e => e.json())).then(c)
         }
         ()
