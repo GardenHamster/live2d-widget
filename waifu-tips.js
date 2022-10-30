@@ -253,7 +253,7 @@
             let e = localStorage.getItem("modelId");
             let o = localStorage.getItem("modelTexturesId");
             let m = null;
-            null === e && (e = 0, o = 0, m = 'HyperdimensionNeptunia/nepmaid'),
+            null === e && (e = 5, o = 0, m = 'HyperdimensionNeptunia/nepmaid'),
             i.loadTargetModel(e, o, m),
             fetch(t.waifuPath).then((e => e.json())).then(c)
         }
